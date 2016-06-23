@@ -107,15 +107,19 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
     FISTriviaTableViewController *destinationVC = (FISTriviaTableViewController *)segue.destinationViewController;
-
     
-    UITableViewCell *cell = (UITableViewCell *)sender;
+//First way
+    NSIndexPath *rowSelected = [self.tableView indexPathForSelectedRow];
+    destinationVC.trivia = ((FISLocation *)self.locations[rowSelected.row]).trivia;
+    
+    //FISLocation *locationSelected = self.locations[rowSelected.row];
+    //NSArray *triviumToBePassed = locationSelected.trivia;
+    //destinationVC.trivia = triviumToBePassed;
+    
+//Second way
+ /*   UITableViewCell *cell = (UITableViewCell *)sender;
     NSArray *triviumToBePassed = [[NSArray alloc] init];
     for (FISLocation *place in self.locations) {
         if ([cell.textLabel.text isEqualToString: place.name ]) {
@@ -123,10 +127,8 @@
         }
     }
     destinationVC.trivia = triviumToBePassed;
-  
-    //gotta find that location item matching name
-    //then pass trivia objects for that location to next view
-    // display all trivia for that location in text label of each cell
+ */
+    
     
 }
 
